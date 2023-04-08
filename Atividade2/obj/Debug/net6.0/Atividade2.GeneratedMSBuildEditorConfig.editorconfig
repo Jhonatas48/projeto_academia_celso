@@ -8,117 +8,117 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Atividade2
 build_property.RootNamespace = Atividade2
-build_property.ProjectDir = C:\Users\mateu\Desktop\DesWebBackEnd\Atividade2\Atividade2\
+build_property.ProjectDir = C:\Users\mateu\Documents\GitHub\projeto_academia_celso\Atividade2\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\mateu\Desktop\DesWebBackEnd\Atividade2\Atividade2
+build_property.MSBuildProjectDirectory = C:\Users\mateu\Documents\GitHub\projeto_academia_celso\Atividade2
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Aluno/Create.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Aluno/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bm9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Aluno/Delete.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Aluno/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bm9cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Aluno/Details.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Aluno/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bm9cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Aluno/Edit.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Aluno/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bm9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Aluno/Index.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Aluno/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bm9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Exercicios/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvc1xDcmVhdGUuY3NodG1s
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Exercicio/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Exercicios/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvc1xEZWxldGUuY3NodG1s
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Exercicio/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Exercicios/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvc1xEZXRhaWxzLmNzaHRtbA==
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Exercicio/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Exercicios/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvc1xFZGl0LmNzaHRtbA==
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Exercicio/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Exercicios/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvc1xJbmRleC5jc2h0bWw=
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Exercicio/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpY2lvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Home/Index.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Home/Privacy.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Personals/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxzXENyZWF0ZS5jc2h0bWw=
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Personal/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Personals/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxzXERlbGV0ZS5jc2h0bWw=
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Personal/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Personals/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxzXERldGFpbHMuY3NodG1s
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Personal/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Personals/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxzXEVkaXQuY3NodG1s
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Personal/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Personals/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxzXEluZGV4LmNzaHRtbA==
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Personal/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Shared/Error.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Treinos/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vc1xDcmVhdGUuY3NodG1s
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Treino/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Treinos/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vc1xEZWxldGUuY3NodG1s
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Treino/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Treinos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vc1xEZXRhaWxzLmNzaHRtbA==
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Treino/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Treinos/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vc1xFZGl0LmNzaHRtbA==
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Treino/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Treinos/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vc1xJbmRleC5jc2h0bWw=
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Treino/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlaW5vXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/_ViewImports.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/_ViewStart.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/Desktop/DesWebBackEnd/Atividade2/Atividade2/Views/Shared/_Layout.cshtml]
+[C:/Users/mateu/Documents/GitHub/projeto_academia_celso/Atividade2/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-72xlp46uib

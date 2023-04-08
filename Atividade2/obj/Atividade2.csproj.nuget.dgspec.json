@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mateu\\Desktop\\DesWebBackEnd\\Atividade2\\Atividade2\\Atividade2.csproj": {}
+    "C:\\Users\\mateu\\Documents\\GitHub\\projeto_academia_celso\\Atividade2\\Atividade2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mateu\\Desktop\\DesWebBackEnd\\Atividade2\\Atividade2\\Atividade2.csproj": {
+    "C:\\Users\\mateu\\Documents\\GitHub\\projeto_academia_celso\\Atividade2\\Atividade2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mateu\\Desktop\\DesWebBackEnd\\Atividade2\\Atividade2\\Atividade2.csproj",
+        "projectUniqueName": "C:\\Users\\mateu\\Documents\\GitHub\\projeto_academia_celso\\Atividade2\\Atividade2.csproj",
         "projectName": "Atividade2",
-        "projectPath": "C:\\Users\\mateu\\Desktop\\DesWebBackEnd\\Atividade2\\Atividade2\\Atividade2.csproj",
+        "projectPath": "C:\\Users\\mateu\\Documents\\GitHub\\projeto_academia_celso\\Atividade2\\Atividade2.csproj",
         "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mateu\\Desktop\\DesWebBackEnd\\Atividade2\\Atividade2\\obj\\",
+        "outputPath": "C:\\Users\\mateu\\Documents\\GitHub\\projeto_academia_celso\\Atividade2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",

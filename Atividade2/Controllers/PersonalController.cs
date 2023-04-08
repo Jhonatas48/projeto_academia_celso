@@ -9,11 +9,11 @@ using Atividade2.Models;
 
 namespace Atividade2.Controllers
 {
-    public class PersonalsController : Controller
+    public class PersonalController : Controller
     {
         private readonly Context _context;
 
-        public PersonalsController(Context context)
+        public PersonalController(Context context)
         {
             _context = context;
         }

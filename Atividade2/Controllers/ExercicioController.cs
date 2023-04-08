@@ -9,11 +9,11 @@ using Atividade2.Models;
 
 namespace Atividade2.Controllers
 {
-    public class ExerciciosController : Controller
+    public class ExercicioController : Controller
     {
         private readonly Context _context;
 
-        public ExerciciosController(Context context)
+        public ExercicioController(Context context)
         {
             _context = context;
         }
