@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cZTOyG1dUBqDkFUu92GFjgIu9IfqtXzZslwwhpJ51TNDAwJAMrYGGEU1lsDoyKNXEgU5/bEAEfwrk/sgC6/uZw==",
+  "dgSpecHash": "fO7FPs9Vt6satDraUa3WSQwlNmUVSPVWOD69xscUvRN3VnlaI55o7LD70DGWX0rpDalt2TiOlI5wjS/3D0Ty5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mateu\\Desktop\\DesWebBackEnd\\Atividade2\\Atividade2\\Atividade2.csproj",
+  "projectFilePath": "C:\\Users\\mateu\\Documents\\GitHub\\projeto_academia_celso\\Atividade2\\Atividade2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

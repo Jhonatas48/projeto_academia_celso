@@ -6,22 +6,32 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Atividade2.Models;
+using Atividade2.ViewModels;
 
 namespace Atividade2.Controllers
 {
-    public class TreinosController : Controller
+    public class TreinoController : Controller
     {
         private readonly Context _context;
 
-        public TreinosController(Context context)
+        public TreinoController(Context context)
         {
             _context = context;
         }
 
         // GET: Treinoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? treinoID)
         {
-            var context = _context.Treinos.Include(t => t.Aluno);
+            var context = _context.Treinos
+                .Include(t => t.Aluno)
+                .Include(t => t.Exercicios)
+                .Include(t => t.Personal);
+
+            if (treinoID != null)
+            {
+                ViewBag.TreinoID = treinoID.Value;
+            }
+
             return View(await context.ToListAsync());
         }
 
@@ -47,7 +57,8 @@ namespace Atividade2.Controllers
         // GET: Treinoes/Create
         public IActionResult Create()
         {
-            ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "AlunoID");
+            ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "Nome");
+            ViewData["PersonalID"] = new SelectList(_context.Personals, "PersonalID", "Nome");
             return View();
         }
 
@@ -73,13 +84,37 @@ namespace Atividade2.Controllers
                 return NotFound();
             }
 
-            var treino = await _context.Treinos.FindAsync(id);
+            Treino treino = _context.Treinos.Include(t => t.Exercicios).Where(t => t.TreinoID == id).Single();
             if (treino == null)
             {
                 return NotFound();
             }
-            ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "AlunoID", treino.AlunoID);
+
+            //ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "AlunoID", treino.AlunoID);
+            
+            PopulateDadosExericiosDisponiveis(treino);
             return View(treino);
+        }
+
+        private void PopulateDadosExericiosDisponiveis(Treino treino)
+        {
+            ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "Nome");
+            ViewData["PersonalID"] = new SelectList(_context.Personals, "PersonalID", "Nome");
+
+            var allExercicios = _context.Exercicios;
+            var exerciciosNoTreino = new HashSet<int>(treino.Exercicios.Select(e => e.ExercicioID));
+            var viewModel = new List<DadosExerciciosDisponiveis>();
+            foreach (var exercicio in allExercicios)
+            {
+                viewModel.Add(new DadosExerciciosDisponiveis
+                {
+                    ExercicioID = exercicio.ExercicioID,
+                    Nome = exercicio.Nome,
+                    Descricao = exercicio.Descricao,
+                    Incluido = exerciciosNoTreino.Contains(exercicio.ExercicioID)
+                });
+            }
+            ViewBag.Exercicios = viewModel;
         }
 
         // POST: Treinoes/Edit/5
@@ -87,21 +122,28 @@ namespace Atividade2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Treino treino)
+        public async Task<IActionResult> Edit(int? id, string[] exerciciosSelecionados)
         {
-            if (treino == null)
+            if (id == null)
             {
                 return NotFound();
             }
+            var treinoToUpdate = _context.Treinos
+                .Include(t => t.Aluno)
+                .Include(t => t.Personal)
+                .Include(t => t.Exercicios)
+                .Where(t => t.TreinoID == id)
+                .Single();
 
             try
             {
-                _context.Update(treino);
+                UpdateExerciciosNoTreino(exerciciosSelecionados, treinoToUpdate);
+                //_context.Update(treino);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TreinoExists(treino.TreinoID))
+                if (!TreinoExists(treinoToUpdate.TreinoID))
                 {
                     return NotFound();
                 }
@@ -110,7 +152,37 @@ namespace Atividade2.Controllers
                     throw;
                 }
             }
-            return RedirectToAction(nameof(Index));
+            PopulateDadosExericiosDisponiveis(treinoToUpdate);
+            return View(treinoToUpdate);
+        }
+
+        private void UpdateExerciciosNoTreino(string[] exerciciosSelecionados, Treino treinoToUpdate)
+        {
+            if (exerciciosSelecionados == null)
+            {
+                treinoToUpdate.Exercicios = new List<Exercicio>();
+                return;
+            }
+
+            var exerciciosSelecionadosHS = new HashSet<string>(exerciciosSelecionados);
+            var exerciciosNoTreino = new HashSet<int>(treinoToUpdate.Exercicios.Select(e => e.ExercicioID));
+            foreach (var exercicio in _context.Exercicios)
+            {
+                if (exerciciosSelecionadosHS.Contains(exercicio.ExercicioID.ToString()))
+                {
+                    if (!exerciciosNoTreino.Contains(exercicio.ExercicioID))
+                    {
+                        treinoToUpdate.Exercicios.Add(exercicio);
+                    }
+                }
+                else
+                {
+                    if (exerciciosNoTreino.Contains(exercicio.ExercicioID))
+                    {
+                        treinoToUpdate.Exercicios.Remove(exercicio);
+                    }
+                }
+            }
         }
 
         // GET: Treinoes/Delete/5
