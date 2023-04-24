@@ -1,0 +1,46 @@
+﻿/* custom.scss */
+
+/* import necessary bootstrap files */
+@import "lib/bootstrap/scss/_functions.scss";
+@import "lib/bootstrap/scss/_variables.scss";
+@import "lib/bootstrap/scss/_mixins.scss";
+
+/* make changes to the !default Bootstrap variables (override) */
+
+/* finally, import Bootstrap to save the changes! */
+@import "lib/bootstrap/scss/bootstrap.scss";
+
+/* create new custom classes from existing classes (extend) */
+
+.customcheck {
+    @extend .btn-outline-primary;
+}
+
+.customcheck input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    cursor: pointer;
+}
+
+.customcheck.active {
+    background-color: black;
+}
+
+.customcheck input ~ .icon {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url(../icons/close_FILL0_wght700_GRAD0_opsz48.svg);
+    background-size: 25px 25px;
+}
+
+.customcheck input:checked ~ .icon {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url(../icons/done_FILL0_wght700_GRAD0_opsz48.svg);
+    background-size: 25px 25px;
+}
