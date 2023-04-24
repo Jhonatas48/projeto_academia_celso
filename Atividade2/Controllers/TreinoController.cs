@@ -19,7 +19,7 @@ namespace Atividade2.Controllers
             _context = context;
         }
 
-        // GET: Treinoes
+        // GET: Treinos
         public async Task<IActionResult> Index(int? treinoID)
         {
             var context = _context.Treinos
@@ -35,7 +35,7 @@ namespace Atividade2.Controllers
             return View(await context.ToListAsync());
         }
 
-        // GET: Treinoes/Details/5
+        // GET: Treinos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Treinos == null)
@@ -46,6 +46,7 @@ namespace Atividade2.Controllers
             var treino = await _context.Treinos
                 .Include(t => t.Aluno)
                 .FirstOrDefaultAsync(m => m.TreinoID == id);
+
             if (treino == null)
             {
                 return NotFound();
@@ -54,29 +55,47 @@ namespace Atividade2.Controllers
             return View(treino);
         }
 
-        // GET: Treinoes/Create
+        #region Create
+
+        // GET: Treinos/Create
         public IActionResult Create()
         {
+            Treino t = new Treino() { Exercicios = new List<Exercicio>()};
+
             ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "Nome");
             ViewData["PersonalID"] = new SelectList(_context.Personals, "PersonalID", "Nome");
-            return View();
+            PopulateDadosExericiosDisponiveis(t);
+
+            return View(t);
         }
 
-        // POST: Treinoes/Create
+        // POST: Treinos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Treino treino)
+        public async Task<IActionResult> Create(Treino treino, int[] exerciciosSelecionados)
         {
+            // Ajeitando as referências do treino
+            treino.Aluno = _context.Alunos
+                .Where(a => a.AlunoID == treino.AlunoID)
+                .Single();
+            treino.Personal = _context.Personals
+                .Where(p => p.PersonalID == treino.PersonalID)
+                .Single();
+            treino.Exercicios = new List<Exercicio>();
+            foreach (var exercicioID in exerciciosSelecionados)
+                treino.Exercicios.Add(_context.Exercicios.Where(e => e.ExercicioID == exercicioID).Single());
+
             _context.Add(treino);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "AlunoID", treino.AlunoID);
-            return View(treino);
         }
+        #endregion Create
 
-        // GET: Treinoes/Edit/5
+        #region Edit
+
+        // GET: Treinos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Treinos == null)
@@ -90,8 +109,6 @@ namespace Atividade2.Controllers
                 return NotFound();
             }
 
-            //ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "AlunoID", treino.AlunoID);
-            
             PopulateDadosExericiosDisponiveis(treino);
             return View(treino);
         }
@@ -117,75 +134,68 @@ namespace Atividade2.Controllers
             ViewBag.Exercicios = viewModel;
         }
 
-        // POST: Treinoes/Edit/5
+        // POST: Treinos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, string[] exerciciosSelecionados)
+        public async Task<IActionResult> Edit(Treino treinoRecebido, int[] exerciciosSelecionados) // note que o array é de IDs de exercicios selecionados
         {
-            if (id == null)
-            {
+            if (treinoRecebido == null)
                 return NotFound();
-            }
+
+            // Ajeitando as referências de treinoRecebido
+            treinoRecebido.Aluno = _context.Alunos
+                .Where(a => a.AlunoID == treinoRecebido.AlunoID)
+                .Single();
+            treinoRecebido.Personal = _context.Personals
+                .Where(p => p.PersonalID == treinoRecebido.PersonalID)
+                .Single();
+            treinoRecebido.Exercicios = new List<Exercicio>();
+            foreach (var exercicio in exerciciosSelecionados)
+                treinoRecebido.Exercicios.Add(_context.Exercicios.Where(e => e.ExercicioID == exercicio).Single());
+
             var treinoToUpdate = _context.Treinos
                 .Include(t => t.Aluno)
                 .Include(t => t.Personal)
                 .Include(t => t.Exercicios)
-                .Where(t => t.TreinoID == id)
+                .Where(t => t.TreinoID == treinoRecebido.TreinoID)
                 .Single();
 
             try
             {
-                UpdateExerciciosNoTreino(exerciciosSelecionados, treinoToUpdate);
-                //_context.Update(treino);
+                UpdateTreino(treinoRecebido, treinoToUpdate);
+                //treinoToUpdate = treinoRecebido;    // será que funfa? nope
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!TreinoExists(treinoToUpdate.TreinoID))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
+
             PopulateDadosExericiosDisponiveis(treinoToUpdate);
             return View(treinoToUpdate);
         }
 
-        private void UpdateExerciciosNoTreino(string[] exerciciosSelecionados, Treino treinoToUpdate)
+        private void UpdateTreino(Treino treinoRecebido, Treino treinoToUpdate)
         {
-            if (exerciciosSelecionados == null)
-            {
-                treinoToUpdate.Exercicios = new List<Exercicio>();
-                return;
-            }
-
-            var exerciciosSelecionadosHS = new HashSet<string>(exerciciosSelecionados);
-            var exerciciosNoTreino = new HashSet<int>(treinoToUpdate.Exercicios.Select(e => e.ExercicioID));
-            foreach (var exercicio in _context.Exercicios)
-            {
-                if (exerciciosSelecionadosHS.Contains(exercicio.ExercicioID.ToString()))
-                {
-                    if (!exerciciosNoTreino.Contains(exercicio.ExercicioID))
-                    {
-                        treinoToUpdate.Exercicios.Add(exercicio);
-                    }
-                }
-                else
-                {
-                    if (exerciciosNoTreino.Contains(exercicio.ExercicioID))
-                    {
-                        treinoToUpdate.Exercicios.Remove(exercicio);
-                    }
-                }
-            }
+            treinoToUpdate.Exercicios = treinoRecebido.Exercicios;
+            treinoToUpdate.AlunoID = treinoRecebido.AlunoID;
+            treinoToUpdate.Aluno = treinoRecebido.Aluno;
+            treinoToUpdate.PersonalID = treinoRecebido.PersonalID;
+            treinoToUpdate.Personal = treinoRecebido.Personal;
+            treinoToUpdate.Hora = treinoRecebido.Hora;
+            treinoToUpdate.Data = treinoRecebido.Data;
         }
 
-        // GET: Treinoes/Delete/5
+        #endregion Edit
+
+        #region Delete
+
+        // GET: Treinos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Treinos == null)
@@ -204,7 +214,7 @@ namespace Atividade2.Controllers
             return View(treino);
         }
 
-        // POST: Treinoes/Delete/5
+        // POST: Treinos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -218,14 +228,83 @@ namespace Atividade2.Controllers
             {
                 _context.Treinos.Remove(treino);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TreinoExists(int id)
         {
-          return (_context.Treinos?.Any(e => e.TreinoID == id)).GetValueOrDefault();
+            return (_context.Treinos?.Any(e => e.TreinoID == id)).GetValueOrDefault();
         }
+
+        #endregion Delete
+
+        #region código antigo do edit
+
+        //{ ...
+        //if (id == null)
+        //{
+        //    return NotFound();
+        //}
+        //var treinoToUpdate = _context.Treinos
+        //    .Include(t => t.Aluno)
+        //    .Include(t => t.Personal)
+        //    .Include(t => t.Exercicios)
+        //    .Where(t => t.TreinoID == id)
+        //    .Single();
+
+        //try
+        //{
+        //    UpdateExerciciosNoTreino(exerciciosSelecionados, treinoToUpdate);
+        //    //_context.Update(treino);
+        //    await _context.SaveChangesAsync();
+        //}
+        //catch (DbUpdateConcurrencyException)
+        //{
+        //    if (!TreinoExists(treinoToUpdate.TreinoID))
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        throw;
+        //    }
+        //}
+        //PopulateDadosExericiosDisponiveis(treinoToUpdate);
+        //return View(treinoToUpdate);
+        //return View();
+        //}
+
+        //private void UpdateExerciciosNoTreino(string[] exerciciosSelecionados, Treino treinoToUpdate)
+        //{
+        //    if (exerciciosSelecionados == null)
+        //    {
+        //        treinoToUpdate.Exercicios = new List<Exercicio>();
+        //        return;
+        //    }
+
+        //    var exerciciosSelecionadosHS = new HashSet<string>(exerciciosSelecionados);
+        //    var exerciciosNoTreino = new HashSet<int>(treinoToUpdate.Exercicios.Select(e => e.ExercicioID));
+        //    foreach (var exercicio in _context.Exercicios)
+        //    {
+        //        if (exerciciosSelecionadosHS.Contains(exercicio.ExercicioID.ToString()))    //se o ex tá selecionado, mas não tá no treino
+        //        {
+        //            if (!exerciciosNoTreino.Contains(exercicio.ExercicioID))
+        //            {
+        //                treinoToUpdate.Exercicios.Add(exercicio);       // adiciona no treino
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (exerciciosNoTreino.Contains(exercicio.ExercicioID))     //se o ex NÃO tá selecionado, mas TÁ no treino
+        //            {
+        //                treinoToUpdate.Exercicios.Remove(exercicio);    // remove do treino
+        //            }
+        //        }
+        //    }
+        //}
+
+        #endregion
     }
 }

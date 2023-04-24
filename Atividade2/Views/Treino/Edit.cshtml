@@ -36,31 +36,12 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <table>
-                        <tr>
-                            @{
-                                int cnt = 0;
-                                List<Atividade2.ViewModels.DadosExerciciosDisponiveis> exercicios = ViewBag.Exercicios;
-
-                                foreach (var exercicio in exercicios)
-                                {
-                                    if (cnt++ % 3 == 0)
-                                    {
-                                        @:</tr><tr>
-                                    }
-                                    @:<td>
-                                        <input type="checkbox"
-                                            name="exerciciosSelecionados"
-                                            value="@exercicio.ExercicioID"
-                                            @(Html.Raw(exercicio.Incluido ? "checked=\"checked\"" : "")) />
-                                            @exercicio.ExercicioID @:  @exercicio.Nome
-                                    @:</td>
-                                }
-                                @:</tr>
-                            }
-                        </tr>
-                    </table>
+                <label for="Exercicios">Exercicios:</label>
+                <div>
+                    @foreach (var exercicio in ViewBag.Exercicios)
+                    {
+                        @Html.EditorFor(model => exercicio, "ToggleButton")
+                    }
                 </div>
             </div>
 
@@ -74,6 +55,29 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+    $(document).ready(function() {
+        //encontra todos os botões de alternância
+        var toggleButtons = $('.btn-toggle');
+
+        //adc um evento de clique a todos os botões de alternância
+        toggleButtons.click(function() {
+            //encontra a checkbox correspondente ao botão clicado
+            var checkbox = $(this).children(':checkbox');
+
+            //atualiza o estado do botão de acordo com o valor da checkbox
+            if (checkbox.prop('checked')) {
+                $(this).addClass('active');
+                console.log('yeetus activatus');
+            } else {
+                $(this).removeClass('active');
+                console.log('yeetus deletus');
+            }
+        });
+    });
+</script>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

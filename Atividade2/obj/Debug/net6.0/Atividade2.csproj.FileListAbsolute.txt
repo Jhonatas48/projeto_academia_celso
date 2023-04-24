@@ -574,3 +574,4 @@ C:\Users\mateu\Documents\GitHub\projeto_academia_celso\Atividade2\obj\Debug\net6
 C:\Users\mateu\Documents\GitHub\projeto_academia_celso\Atividade2\obj\Debug\net6.0\Atividade2.pdb
 C:\Users\mateu\Documents\GitHub\projeto_academia_celso\Atividade2\obj\Debug\net6.0\Atividade2.genruntimeconfig.cache
 C:\Users\mateu\Documents\GitHub\projeto_academia_celso\Atividade2\obj\Debug\net6.0\ref\Atividade2.dll
+C:\Users\mateu\Documents\GitHub\projeto_academia_celso\Atividade2\bin\Debug\net6.0\libman.json

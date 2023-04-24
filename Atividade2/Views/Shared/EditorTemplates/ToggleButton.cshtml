@@ -1,0 +1,7 @@
+﻿@model Atividade2.ViewModels.DadosExerciciosDisponiveis //@model Tuple<int, string, bool>    // id exercício, nome exercício, checked y/n
+
+<div class="btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary btn-toggle @((Model.Incluido) ? "active" : "")">
+        <input type="checkbox" autocomplete="off" name="exerciciosSelecionados" value="@Model.ExercicioID" checked="@Model.Incluido" /> @Model.Nome - @Model.Descricao
+    </label>
+</div>
