@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Atividade2.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230403223332_Initial")]
-    partial class Initial
+    [Migration("20230524211617_rebuild")]
+    partial class rebuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,114 @@ namespace Atividade2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Atividade2.Models.Aluno", b =>
+            modelBuilder.Entity("Atividade2.Models.Exercicio", b =>
                 {
-                    b.Property<int>("AlunoID")
+                    b.Property<int>("ExercicioID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AlunoID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExercicioID"));
+
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ExercicioID");
+
+                    b.ToTable("Exercicios");
+                });
+
+            modelBuilder.Entity("Atividade2.Models.Treino", b =>
+                {
+                    b.Property<int>("TreinoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TreinoID"));
+
+                    b.Property<int>("AlunoID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Hora")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PersonalID")
+                        .HasColumnType("int");
+
+                    b.HasKey("TreinoID");
+
+                    b.HasIndex("AlunoID");
+
+                    b.HasIndex("PersonalID");
+
+                    b.ToTable("Treinos");
+                });
+
+            modelBuilder.Entity("Atividade2.Models.Usuario", b =>
+                {
+                    b.Property<int>("UsuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"));
+
+                    b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UsuarioId");
+
+                    b.ToTable("Usuario");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("ExercicioTreino", b =>
+                {
+                    b.Property<int>("ExerciciosExercicioID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TreinosTreinoID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExerciciosExercicioID", "TreinosTreinoID");
+
+                    b.HasIndex("TreinosTreinoID");
+
+                    b.ToTable("ExercicioTreino");
+                });
+
+            modelBuilder.Entity("Atividade2.Models.Aluno", b =>
+                {
+                    b.HasBaseType("Atividade2.Models.Usuario");
+
+                    b.Property<int>("AlunoID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Data_Nascimento")
                         .HasColumnType("datetime2");
@@ -59,45 +160,23 @@ namespace Atividade2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AlunoID");
-
                     b.HasIndex("PersonalID");
 
-                    b.ToTable("Alunos");
-                });
+                    b.ToTable("Usuario", t =>
+                        {
+                            t.Property("Nome")
+                                .HasColumnName("Aluno_Nome");
 
-            modelBuilder.Entity("Atividade2.Models.Exercicio", b =>
-                {
-                    b.Property<int>("ExercicioID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                            t.Property("PersonalID")
+                                .HasColumnName("Aluno_PersonalID");
+                        });
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExercicioID"));
-
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ExercicioID");
-
-                    b.ToTable("Exercicios");
+                    b.HasDiscriminator().HasValue("Aluno");
                 });
 
             modelBuilder.Entity("Atividade2.Models.Personal", b =>
                 {
-                    b.Property<int>("PersonalID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonalID"));
+                    b.HasBaseType("Atividade2.Models.Usuario");
 
                     b.Property<string>("Especialidade")
                         .IsRequired()
@@ -107,62 +186,10 @@ namespace Atividade2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PersonalID");
-
-                    b.ToTable("Personals");
-                });
-
-            modelBuilder.Entity("Atividade2.Models.Treino", b =>
-                {
-                    b.Property<int>("TreinoID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TreinoID"));
-
-                    b.Property<int>("AlunoID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Hora")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("PersonalID")
                         .HasColumnType("int");
 
-                    b.HasKey("TreinoID");
-
-                    b.HasIndex("AlunoID");
-
-                    b.ToTable("Treinos");
-                });
-
-            modelBuilder.Entity("ExercicioTreino", b =>
-                {
-                    b.Property<int>("ExerciciosExercicioID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TreinosTreinoID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ExerciciosExercicioID", "TreinosTreinoID");
-
-                    b.HasIndex("TreinosTreinoID");
-
-                    b.ToTable("ExercicioTreino");
-                });
-
-            modelBuilder.Entity("Atividade2.Models.Aluno", b =>
-                {
-                    b.HasOne("Atividade2.Models.Personal", "Personal")
-                        .WithMany("Alunos")
-                        .HasForeignKey("PersonalID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Personal");
+                    b.HasDiscriminator().HasValue("Personal");
                 });
 
             modelBuilder.Entity("Atividade2.Models.Treino", b =>
@@ -173,7 +200,15 @@ namespace Atividade2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Atividade2.Models.Personal", "Personal")
+                        .WithMany()
+                        .HasForeignKey("PersonalID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Aluno");
+
+                    b.Navigation("Personal");
                 });
 
             modelBuilder.Entity("ExercicioTreino", b =>
@@ -189,6 +224,17 @@ namespace Atividade2.Migrations
                         .HasForeignKey("TreinosTreinoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Atividade2.Models.Aluno", b =>
+                {
+                    b.HasOne("Atividade2.Models.Personal", "Personal")
+                        .WithMany("Alunos")
+                        .HasForeignKey("PersonalID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Personal");
                 });
 
             modelBuilder.Entity("Atividade2.Models.Aluno", b =>

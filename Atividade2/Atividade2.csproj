@@ -7,6 +7,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
 			<PrivateAssets>all</PrivateAssets>
@@ -20,6 +21,10 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
 		<PackageReference Include="X.PagedList" Version="8.4.7" />
 		<PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\js\Scripts\ToggleButtonScript.js" />
 	</ItemGroup>
 
 </Project>

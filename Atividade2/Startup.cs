@@ -17,6 +17,14 @@ namespace Atividade2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".Academia.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(60);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             //config p/ acesso ao banco de dados
             services.AddDbContext<Context>(options => options.UseSqlServer(
@@ -42,11 +50,13 @@ namespace Atividade2
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Session}/{action=Index}/{id?}");
             });
             SeedData.EnsurePopulated(app);
         }

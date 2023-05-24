@@ -36,7 +36,7 @@ namespace Atividade2.Controllers
         {
             context.Add(aluno);
             context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Session");
         }
 
         #endregion Create
@@ -45,6 +45,9 @@ namespace Atividade2.Controllers
 
         public IActionResult Edit(int id)
         {
+            if (!Verify.Session(HttpContext))
+                return RedirectToAction("Index", "Session");
+
             Aluno aluno = context.Alunos.Find(id);
             ViewBag.FabricanteID = new SelectList(context.Personals);
             return View(aluno);
@@ -65,6 +68,9 @@ namespace Atividade2.Controllers
 
         public IActionResult Delete(int id)
         {
+            if (!Verify.Session(HttpContext))
+                return RedirectToAction("Index", "Session");
+
             var aluno = context.Alunos.Find(id);
             return View(aluno);
         }

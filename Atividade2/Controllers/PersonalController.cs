@@ -59,12 +59,15 @@ namespace Atividade2.Controllers
         {
             _context.Add(personal);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index","Session");
         }
 
         // GET: Personals/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!Verify.Session(HttpContext))
+                return RedirectToAction("Index", "Session");
+
             if (id == null || _context.Personals == null)
             {
                 return NotFound();
@@ -113,6 +116,9 @@ namespace Atividade2.Controllers
         // GET: Personals/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!Verify.Session(HttpContext))
+                return RedirectToAction("Index", "Session");
+
             if (id == null || _context.Personals == null)
             {
                 return NotFound();

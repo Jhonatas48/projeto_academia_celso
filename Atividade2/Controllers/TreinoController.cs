@@ -60,6 +60,9 @@ namespace Atividade2.Controllers
         // GET: Treinos/Create
         public IActionResult Create()
         {
+            if (!Verify.Session(HttpContext))
+                return RedirectToAction("Index", "Session");
+
             Treino t = new Treino() { Exercicios = new List<Exercicio>()};
 
             ViewData["AlunoID"] = new SelectList(_context.Alunos, "AlunoID", "Nome");
@@ -98,6 +101,9 @@ namespace Atividade2.Controllers
         // GET: Treinos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!Verify.Session(HttpContext))
+                return RedirectToAction("Index", "Session");
+
             if (id == null || _context.Treinos == null)
             {
                 return NotFound();
@@ -198,6 +204,9 @@ namespace Atividade2.Controllers
         // GET: Treinos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!Verify.Session(HttpContext))
+                return RedirectToAction("Index", "Session");
+
             if (id == null || _context.Treinos == null)
             {
                 return NotFound();

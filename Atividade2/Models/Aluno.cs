@@ -1,6 +1,6 @@
 ﻿namespace Atividade2.Models
 {
-    public class Aluno
+    public class Aluno : Usuario
     {
         public int AlunoID { get; set; }
         public string Nome { get; set; }

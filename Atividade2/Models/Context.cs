@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
+using Atividade2.Models;
 
 namespace Atividade2.Models
 {
@@ -16,6 +17,7 @@ namespace Atividade2.Models
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Treino> Treinos { get; set; }
         public DbSet<Exercicio> Exercicios { get; set; }
+        public DbSet<Atividade2.Models.Usuario>? Usuario { get; set; }
 
     }
 }

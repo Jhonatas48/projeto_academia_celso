@@ -22,47 +22,6 @@ namespace Atividade2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Atividade2.Models.Aluno", b =>
-                {
-                    b.Property<int>("AlunoID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AlunoID"));
-
-                    b.Property<DateTime>("Data_Nascimento")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("E_Mail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Instagram")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Observacoes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PersonalID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AlunoID");
-
-                    b.HasIndex("PersonalID");
-
-                    b.ToTable("Alunos");
-                });
-
             modelBuilder.Entity("Atividade2.Models.Exercicio", b =>
                 {
                     b.Property<int>("ExercicioID")
@@ -86,27 +45,6 @@ namespace Atividade2.Migrations
                     b.HasKey("ExercicioID");
 
                     b.ToTable("Exercicios");
-                });
-
-            modelBuilder.Entity("Atividade2.Models.Personal", b =>
-                {
-                    b.Property<int>("PersonalID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonalID"));
-
-                    b.Property<string>("Especialidade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PersonalID");
-
-                    b.ToTable("Personals");
                 });
 
             modelBuilder.Entity("Atividade2.Models.Treino", b =>
@@ -138,6 +76,39 @@ namespace Atividade2.Migrations
                     b.ToTable("Treinos");
                 });
 
+            modelBuilder.Entity("Atividade2.Models.Usuario", b =>
+                {
+                    b.Property<int>("UsuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"));
+
+                    b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UsuarioId");
+
+                    b.ToTable("Usuario");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+
+                    b.UseTphMappingStrategy();
+                });
+
             modelBuilder.Entity("ExercicioTreino", b =>
                 {
                     b.Property<int>("ExerciciosExercicioID")
@@ -155,13 +126,67 @@ namespace Atividade2.Migrations
 
             modelBuilder.Entity("Atividade2.Models.Aluno", b =>
                 {
-                    b.HasOne("Atividade2.Models.Personal", "Personal")
-                        .WithMany("Alunos")
-                        .HasForeignKey("PersonalID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("Atividade2.Models.Usuario");
 
-                    b.Navigation("Personal");
+                    b.Property<int>("AlunoID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data_Nascimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("E_Mail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Instagram")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Observacoes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PersonalID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("PersonalID");
+
+                    b.ToTable("Usuario", t =>
+                        {
+                            t.Property("Nome")
+                                .HasColumnName("Aluno_Nome");
+
+                            t.Property("PersonalID")
+                                .HasColumnName("Aluno_PersonalID");
+                        });
+
+                    b.HasDiscriminator().HasValue("Aluno");
+                });
+
+            modelBuilder.Entity("Atividade2.Models.Personal", b =>
+                {
+                    b.HasBaseType("Atividade2.Models.Usuario");
+
+                    b.Property<string>("Especialidade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PersonalID")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Personal");
                 });
 
             modelBuilder.Entity("Atividade2.Models.Treino", b =>
@@ -196,6 +221,17 @@ namespace Atividade2.Migrations
                         .HasForeignKey("TreinosTreinoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Atividade2.Models.Aluno", b =>
+                {
+                    b.HasOne("Atividade2.Models.Personal", "Personal")
+                        .WithMany("Alunos")
+                        .HasForeignKey("PersonalID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Personal");
                 });
 
             modelBuilder.Entity("Atividade2.Models.Aluno", b =>

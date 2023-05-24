@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "fO7FPs9Vt6satDraUa3WSQwlNmUVSPVWOD69xscUvRN3VnlaI55o7LD70DGWX0rpDalt2TiOlI5wjS/3D0Ty5Q==",
+  "dgSpecHash": "16fV8KnD1M+wEX+HY1riE9VfZIyqSkfJmFnTenRcJxEXymHWiLN3CnlXB6yC1GqUgxuFVwyxjEVsSZ6YQ4wOxw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mateu\\Documents\\GitHub\\projeto_academia_celso\\Atividade2\\Atividade2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\jetbrains.annotations\\2022.3.1\\jetbrains.annotations.2022.3.1.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

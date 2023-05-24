@@ -47,7 +47,10 @@ namespace Atividade2.Controllers
         // GET: Exercicios/Create
         public IActionResult Create()
         {
-            return View();
+            if (Verify.Session(HttpContext))
+                return View();
+            else 
+                return RedirectToAction("Index","Session");
         }
 
         // POST: Exercicios/Create
@@ -65,17 +68,22 @@ namespace Atividade2.Controllers
         // GET: Exercicios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Exercicios == null)
+            if (Verify.Session(HttpContext))
             {
-                return NotFound();
-            }
+                if (id == null || _context.Exercicios == null)
+                {
+                    return NotFound();
+                }
 
-            var exercicio = await _context.Exercicios.FindAsync(id);
-            if (exercicio == null)
-            {
-                return NotFound();
+                var exercicio = await _context.Exercicios.FindAsync(id);
+                if (exercicio == null)
+                {
+                    return NotFound();
+                }
+                return View(exercicio);
             }
-            return View(exercicio);
+            else
+                return RedirectToAction("Index", "Session");
         }
 
         // POST: Exercicios/Edit/5
@@ -112,6 +120,9 @@ namespace Atividade2.Controllers
         // GET: Exercicios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!Verify.Session(HttpContext))
+                    return RedirectToAction("Index", "Session");
+
             if (id == null || _context.Exercicios == null)
             {
                 return NotFound();
